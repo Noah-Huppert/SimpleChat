@@ -1,6 +1,6 @@
-"use 6to5";
-
 /* Require */
+var path = require("path");
+
 var express = require("express");
 var app = express();
 
@@ -12,12 +12,11 @@ var config = {
   port: process.env.PORT || 3000
 };
 
-app.use("/libs", express.static(__dirname + "/libs"));
-app.use("/src/js/public", express.static(__dirname + "/js"));
+app.use("/js", express.static(`${__dirname}/public`));
 
 /* App */
 app.get("/", function(req, res){
-  res.sendfile("./src/index.html");
+  res.sendFile(path.resolve(`${__dirname}/../index.html`));
 });
 
 /* Start */
