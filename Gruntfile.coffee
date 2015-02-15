@@ -17,13 +17,8 @@ module.exports = (grunt) ->
         files:
           "src/js/public/deps.js": "src/es6/public/deps.jsx"
       app:
-        files: [
-          expand: true,
-          cwd: "src/es6/public",
-          src: ["**/*.jsx"],
-          dest: "src/js/public",
-          ext: ".js"
-        ]
+        files:
+          "src/js/public/client.js": "src/es6/public/client.jsx"
         options:
           ignore: "src/es6/public/deps.jsx"
 

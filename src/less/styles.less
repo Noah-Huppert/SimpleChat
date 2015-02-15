@@ -1,2 +1,44 @@
 @import "node_modules/material-ui/src/less/scaffolding.less";
 @import "node_modules/material-ui/src/less/components.less";
+
+/* Globals */
+body{
+  font-family: 'Roboto', sans-serif;
+}
+
+.content{
+  padding-top: @app-bar-height + 5;
+}
+
+/* Header */
+.header-changeUserInfoDialog .mui-text-field{
+  width: 100%;
+}
+
+/* Chat Message */
+@chat-message-size: 42px;
+
+.chatMessage {
+  width: 90%;
+  min-width: 250px;
+  height: @chat-message-size;
+  margin: auto;
+
+  .chatMessage-gravatar{
+    width: @chat-message-size;
+    height: @chat-message-size;
+    padding: 5px;
+    display: inline-block;
+    border-radius: @chat-message-size;
+  }
+
+  .chatMessage-name{
+    width: auto;
+    max-width: 100px;
+    height: @chat-message-size;
+    line-height: @chat-message-size;
+    display: inline-block;
+    overflow: hidden;
+    font-size: 16px;
+  }
+}

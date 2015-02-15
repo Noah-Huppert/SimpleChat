@@ -13,6 +13,8 @@ var config = {
 };
 
 app.use("/js", express.static(`${__dirname}/public`));
+app.use("/css", express.static(path.resolve(`${__dirname}/../css`)));
+app.use("/google-icons",express.static(path.resolve(`${__dirname}/../../node_modules/material-design-icons`)));
 
 /* App */
 app.get("/", function(req, res){
