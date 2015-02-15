@@ -21,6 +21,10 @@ app.get("/", function(req, res){
   res.sendFile(path.resolve(`${__dirname}/../index.html`));
 });
 
+io.on("connection", function(socket){
+  
+});
+
 /* Start */
 app.listen(config.port, function(){
   console.log(`App running on port ${config.port}`);

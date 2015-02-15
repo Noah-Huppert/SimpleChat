@@ -23,6 +23,11 @@ module.exports = (grunt) ->
           ignore: "src/es6/public/deps.jsx"
 
     "6to5":
+      options:
+        sourceMap: true
+      app:
+        files:
+          "src/js/public/client.js": "src/es6/public/client.jsx"
       server:
         files: [
           expand: true,
@@ -56,7 +61,7 @@ module.exports = (grunt) ->
         tasks: tasks "browserify:deps"
       app:
         files: ["src/es6/public/**/*.jsx", "!src/es6/public/deps.js"]
-        tasks: tasks "browserify:app"
+        tasks: tasks "6to5:app"
       server:
         files: ["src/es6/**/*.js", "!src/es6/public/**/*"]
         tasks: tasks "6to5:server"
@@ -75,7 +80,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask "default", ["deps", "app", "server", "styles"]
   grunt.registerTask "deps", tasks "browserify:deps"
-  grunt.registerTask "app", tasks "browserify:app"
+  grunt.registerTask "app", tasks "6to5:app"
   grunt.registerTask "server", tasks "6to5:server"
   grunt.registerTask "server-watch", "nodemon:server"
   grunt.registerTask "styles", tasks "less:styles"

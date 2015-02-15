@@ -1,10 +1,13 @@
-var User = require("./User.jsx");
-var Message = require("./Message.jsx");
+import User from "User";
+import Message from "Message";
+import EventBus from "EventBus";
 
 class SimpleChat{
   constructor(){
-    this.User = new User("", "");
+    this.User = new User("", "", "");
+    this.EventBus = new EventBus();
     this.Messages = [];
+    this.Users = [];
   }
 
   createModelClass(options){
@@ -52,4 +55,4 @@ class SimpleChat{
   }
 }
 
-module.exports = SimpleChat;
+export default SimpleChat;

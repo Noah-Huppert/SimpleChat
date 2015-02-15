@@ -1,6 +1,6 @@
 var Paper = mui.Paper;
 
-var Gravatar = require("./Gravatar.jsx");
+import Gravatar from "Gravatar";
 
 var ChatMessage = App.createModelClass({
   models: {
@@ -11,9 +11,10 @@ var ChatMessage = App.createModelClass({
       <Paper zDepth={2} className="chatMessage">
         <Gravatar className="chatMessage-gravatar" email={this.state.user.email} />
         <span className="chatMessage-name">{this.state.user.name}</span>
+        <span className="chatMessage-content">{this.state.message}</span>
       </Paper>
     );
   }
 });
 
-module.exports = ChatMessage;
+export default ChatMessage;

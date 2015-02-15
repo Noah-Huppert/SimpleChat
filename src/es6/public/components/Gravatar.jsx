@@ -1,4 +1,4 @@
-var md5 = require("MD5");
+import md5 from "MD5";
 
 var Gravatar = React.createClass({
   render: function(){
@@ -13,4 +13,4 @@ var Gravatar = React.createClass({
   }
 });
 
-module.exports = Gravatar;
+export default Gravatar;

@@ -1,4 +1,4 @@
-var BaseModel = require("./BaseModel.jsx");
+import BaseModel from "BaseModel";
 
 class Message extends BaseModel{
   constructor(user, content){
@@ -9,4 +9,4 @@ class Message extends BaseModel{
   }
 }
 
-module.exports = Message;
+export default Message;

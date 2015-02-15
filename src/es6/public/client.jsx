@@ -1,9 +1,8 @@
-var SimpleChat = require("./models/SimpleChat.jsx");
+import SimpleChat from "models/SimpleChat";
+import Main from "components/Main";
 
 window.App = new SimpleChat();
 
 $(document).ready(function(){
-  var Main = require("./components/Main.jsx");
-
   React.render(<Main />, document.body);
 });

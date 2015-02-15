@@ -1,12 +1,13 @@
-var BaseModel = require("./BaseModel.jsx");
+import BaseModel from "BaseModel";
 
 class User extends BaseModel {
-  constructor(name, email){
+  constructor(id, name, email){
     super();
-    
+
+    this.id = id;
     this.name = name;
     this.email = email;
   }
 }
 
-module.exports = User;
+export default User;

@@ -1,5 +1,5 @@
-var ChatMessage = require("./ChatMessage.jsx");
-var Message = require("../models/Message.jsx");
+import ChatMessage from "ChatMessage";
+import Message from "../models/Message";
 
 var ChatArea = React.createClass({
   render: function(){
@@ -11,4 +11,4 @@ var ChatArea = React.createClass({
   }
 });
 
-module.exports = ChatArea;
+export default ChatArea;

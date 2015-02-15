@@ -5,7 +5,7 @@ var FlatButton = mui.FlatButton;
 var TextField = mui.TextField;
 var FontIcon = mui.FontIcon;
 
-var ChatArea = require("./ChatArea.jsx");
+import ChatArea from "ChatArea";
 
 var Main = React.createClass({
   render: function(){
@@ -43,4 +43,4 @@ var Main = React.createClass({
   }
 });
 
-module.exports = Main;
+export default Main;

@@ -44,4 +44,4 @@ class BaseModel {
   }
 }
 
-module.exports = BaseModel;
+export default BaseModel;
