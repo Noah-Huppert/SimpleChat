@@ -10,23 +10,15 @@ class SimpleChat{
   createModelClass(options){
     var _options = _.clone(options);
 
-    options._bindMetaId = uuid.v4();
-
     options.componentWillMount = function(){
       if(options.models === undefined || typeof options.models !== "object"){
         throw "options.models must be defined and an object";
       }
 
       _.each(options.models, (model, key) => {
-        if(model._bindMeta === undefined){
-          model._bindMeta = {};
-        }
-
-        model._bindMeta[options._bindMetaId] = key;
-
-        model.onChange((model, key, oldVal, newVal) => {
-          options._onModelChange(this, model, key, oldVal, newVal);
-        });
+        model.onChange((model, key, value, extras) => {
+          options._onModelChange(this, model, key, value, extras);
+        }, {stateKey: key});
       });
 
       if(_options.componentWillMount !== undefined){
@@ -48,12 +40,10 @@ class SimpleChat{
       return state;
     };
 
-    options._onModelChange = function(self, model, key, oldVal, newVal) {
+    options._onModelChange = function(self, model, key, value, extras) {
       var state = {};
 
-      var stateKey = model._bindMeta[options._bindMetaId];
-
-      state[stateKey] = model;
+      state[extras.stateKey] = model;
 
       self.setState(state);
     };

@@ -1,3 +1,10 @@
+class ChangeCallback{
+  constructor(callback, extras = {}){
+    this.callback = callback;
+    this.extras = extras;
+  }
+}
+
 class BaseModel {
   constructor(){
     this.onChangeCallbacks = [];
@@ -23,15 +30,17 @@ class BaseModel {
   _fireChange(model, key, oldVal, newVal){
     this._checkOnChangeCallbacks();
 
-    _.each(this.onChangeCallbacks, (callback) =>{
-      callback(this, key, oldVal, newVal);
+    _.each(this.onChangeCallbacks, (changeCallback) =>{
+      changeCallback.callback(this, key, newVal, changeCallback.extras);
     })
   }
 
-  onChange(callback){
+  onChange(callback, extras = {}){
     this._checkOnChangeCallbacks();
 
-    this.onChangeCallbacks.push(callback);
+    var changeCallback = new ChangeCallback(callback, extras);
+
+    this.onChangeCallbacks.push(changeCallback);
   }
 }
 
