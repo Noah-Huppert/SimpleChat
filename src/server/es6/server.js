@@ -9,20 +9,25 @@ var io = require("socket.io")(server);
 
 /* Config */
 var config = {
-  port: process.env.PORT || 3000
+  port: process.env.PORT || 9000
 };
 
+/*app.use("/jspm", express.static(path.resolve(`${__dirname}/../../jspm_packages`)));
+app.use("/jspm-config", express.static(`${__dirname}/../jspm`));
 app.use("/js", express.static(`${__dirname}/public`));
-app.use("/css", express.static(path.resolve(`${__dirname}/../css`)));
-app.use("/google-icons",express.static(path.resolve(`${__dirname}/../../node_modules/material-design-icons`)));
+app.use("/css", express.static(path.resolve(`${__dirname}/../css`)));*/
+
+var clientDirPath = path.resolve(`${__dirname}/../../client`);
+console.log(clientDirPath);
+app.use("/client", express.static(clientDirPath));
 
 /* App */
 app.get("/", function(req, res){
-  res.sendFile(path.resolve(`${__dirname}/../index.html`));
+  res.sendFile(`${clientDirPath}/index.html`);
 });
 
 io.on("connection", function(socket){
-  
+
 });
 
 /* Start */

@@ -10,77 +10,65 @@ module.exports = (grunt) ->
     return newTasks
 
   grunt.initConfig
-    browserify:
-      options:
-        transform: ["6to5ify"]
-      deps:
-        files:
-          "src/js/public/deps.js": "src/es6/public/deps.jsx"
-      app:
-        files:
-          "src/js/public/client.js": "src/es6/public/client.jsx"
-        options:
-          ignore: "src/es6/public/deps.jsx"
-
-    "6to5":
+    babel:
       options:
         sourceMap: true
-      app:
-        files:
-          "src/js/public/client.js": "src/es6/public/client.jsx"
-      server:
+        modules: ["common"]
+      client:
         files: [
-          expand: true,
-          cwd: "src/es6",
-          src: ["**/*.js"],
-          dest: "src/js",
+          expand: true
+          cwd: "src/client/es6"
+          src: ["**/*.jsx"]
+          dest: "src/client/js"
           ext: ".js"
         ]
-        options:
-          ignore: "src/es6/public"
+      server:
+        files: [
+          expand: true
+          cwd: "src/server/es6"
+          src: ["**/*.js"]
+          dest: "src/server/js"
+          ext: ".js"
+        ]
 
     less:
       styles:
         files: [
-          expand: true,
-          cwd: "src/less",
-          src: ["**/*.less"],
-          dest: "src/css",
+          expand: true
+          cwd: "src/client/less"
+          src: ["**/*.less"]
+          dest: "src/client/css"
           ext: ".css"
         ]
 
     nodemon:
       server:
-        script: "src/js/server.js"
+        script: "src/server/js/server.js"
         options:
-          watch: ["src/js/server.js"]
+          watch: ["src/server/js/server.js"]
 
     watch:
-      deps:
-        files: "src/es6/public/deps.jsx"
-        tasks: tasks "browserify:deps"
-      app:
-        files: ["src/es6/public/**/*.jsx", "!src/es6/public/deps.js"]
-        tasks: tasks "6to5:app"
+      client:
+        files: "src/client/es6/**/*.jsx"
+        tasks: "client"
       server:
-        files: ["src/es6/**/*.js", "!src/es6/public/**/*"]
-        tasks: tasks "6to5:server"
+        files: "src/server/es6/**/*.js"
+        task: "server"
       styles:
         files: "src/less/**/*.less"
-        tasks: tasks "less:styles"
+        tasks: "styles"
       options:
         livereload: true
 
-  grunt.loadNpmTasks "grunt-browserify"
   grunt.loadNpmTasks "grunt-newer"
-  grunt.loadNpmTasks "grunt-6to5"
+  grunt.loadNpmTasks "grunt-babel"
   grunt.loadNpmTasks "grunt-contrib-watch"
+  grunt.loadNpmTasks "grunt-newer"
   grunt.loadNpmTasks "grunt-contrib-less"
   grunt.loadNpmTasks "grunt-nodemon"
 
-  grunt.registerTask "default", ["deps", "app", "server", "styles"]
-  grunt.registerTask "deps", tasks "browserify:deps"
-  grunt.registerTask "app", tasks "6to5:app"
-  grunt.registerTask "server", tasks "6to5:server"
+  grunt.registerTask "default", ["client", "server","styles"]
+  grunt.registerTask "client", tasks "babel:client"
+  grunt.registerTask "server", tasks "babel:server"
   grunt.registerTask "server-watch", "nodemon:server"
   grunt.registerTask "styles", tasks "less:styles"

@@ -1,12 +1,14 @@
-#Npm
+#Package Manager
 node_modules
 npm-debug.log
+bower_components
+jspm_packages
 
 #Compiled ES6
-src/js
+src/**/js/
 
 #Compiled less
-src/css
+src/**/css
 
 #Bower
 libs
